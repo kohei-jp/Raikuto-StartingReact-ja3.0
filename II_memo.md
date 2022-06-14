@@ -4,10 +4,10 @@
 
 ・その仮想 DOM を構成するのが React Elements。
 
-・Reactコンポーネントは、props を引数として受け取り、戻り値として React Elementsを返す関数。
+・Reactコンポーネントは、props を引数として受け取り、戻り値として React Elementsを返す関数。  
 　引数と戻り値があることが、関数に似ているが、違いとしては、個々に「状態」を持つ事ができる所。
 
-・Reactの差分エンジンで検出される要素としては、propsとstateがある。これらが変化するとレンダリングが走る。
+・Reactの差分エンジンで検出される要素としては、propsとstateがある。これらが変化するとレンダリングが走る。  
 　→ ただ極力、stateは持たせない様にしたい。 React にとって理想的 なコンポーネントとは、props が同じなら必ずレンダリング結果が同じになるコンポーネントであるため。( = 純粋関数 )
 
 
@@ -19,16 +19,16 @@
 import CharacterList, { Character } from './CharacterList';
 
 const App: VFC = () => {
-　const characters: Character[] = [
+  const characters: Character[] = [
     { id: 1, name: '桜木花道', grade: 1, height: 189.2 },
     { id: 2, name: '流川 楓', grade: 1, height: 187 },
   ];
 
-　return (
-   <>
-  	<CharacterList school="湘北高校" characters={characters} />
-	 </>
-　)
+  return (
+    <>
+      <CharacterList school="湘北高校" characters={characters} />
+    </>
+  )
 }
 export default App;
 
@@ -37,7 +37,6 @@ export default App;
 import { VFC } from 'react';
 import { Header, Icon, Item } from 'semantic-ui-react';
 
-// 
 export type Character = {
   id: number;
   name: string;
@@ -142,7 +141,7 @@ export default App;
 
 ```
 
-stateに値をセットするときに使用する```setState```メソッドの使用方法
+stateに値をセットするときに使用する```setState```メソッドの使用方法  
 ① state内の変更したい要素名のキーに、値をその値にしたオブジェクトを渡す。
 
 ```ts
@@ -159,7 +158,7 @@ this.setState((state) => ({ count: state.count + 1 }));
 
 
 **①の注意事項 P.145**
-**state の値の更新は、 React によるレンダリング最適化処理の中で非同期に行われる**ため、
+**state の値の更新は、 React によるレンダリング最適化処理の中で非同期に行われる**ため、  
 ②のサンプルでやっている カウントアップさせる際に、1の方法で「 **this.state.count + 1** 」をすると、stateが最新の値でない可能性がある。そのため、明示的に引数で現在の値を渡してあげる必要がある。
 
 ```ts
@@ -189,27 +188,26 @@ e.preventDefault():  実行は該当要素のオリジナルの挙動を抑制�
 
 ##### 8-4. コンポーネントのライフサイクル
 
-コン ポーネントにおけるライフサイクルとは、
-まずマウントして初期化され、次にレンダリングされた後、 何らかのきっかけで再レンダリングされ、
-最後にアンマウントされるまでの過程をいう。
+コン ポーネントにおけるライフサイクルとは、  
+まずマウントして初期化され、次にレンダリングされた後、 何らかのきっかけで再レンダリングされ、  
+最後にアンマウントされるまでの過程をいう。  
 
 1. <u>Mounting フェーズ</u> ...... 
 
    コンポーネントが初期化され、仮想 DOM にマウントされるまでの フェーズ。このフェーズで初めてコンポーネントがレンダリングされる
 
-   ex. componentDidMount: コンポーネントがマウントされた直後に呼ば れる
+   ex. componentDidMount: コンポーネントがマウントされた直後に呼ばれる
 
 2. <u>Updating フェーズ</u> ...... 
 
    差分検出処理エンジンが変更を検知してコンポーネントが再レン ダリングされるフェーズ
 
-   ex.  shouldComponentUpdate: 変更を検知してから再レンダリング処理の前 に呼ばれ、
-   　　　　　　　　　　　　　　   false を返すことで再レンダリング を中止できる
+   ex. shouldComponentUpdate: 変更を検知してから再レンダリング処理の前 に呼ばれ、  
+  false を返すことで再レンダリング を中止できる
 
-   　　componentDidUpdate: 再レンダリングの完了直後に呼ばれる
+  componentDidUpdate: 再レンダリングの完了直後に呼ばれる
 
 3. <u>Unmounting</u> フェーズ ...... 
-
    コンポーネントが仮想 DOM から削除されるフェーズ
 
    componentWillUnmount(): コンポーネントがアンマウントされて破棄さ れる直前に呼ばれる
@@ -252,9 +250,9 @@ e.preventDefault():  実行は該当要素のオリジナルの挙動を抑制�
 5. 階層構造を逆のぼって考え、データが上階層から流れてくるようにする
 ```
 
-今回の件に落とし込むと、
-１、2は、 見た目を作り込む presentational component の設計
- 3〜 5は、ロジックを追加する container component の設計
+今回の件に落とし込むと、  
+１、2は、 見た目を作り込む presentational component の設計  
+ 3〜 5は、ロジックを追加する container component の設計  
 
 
 
@@ -293,26 +291,27 @@ type State = { count: number };
 // 必要な stateやロジックのためのメンバーメソッドを持つ「クラスコンポーネント」を生成してる。
 const withCounter = (WrappedComponent: FC<Props & Partial<InjectedProps>>) => 
 
-	class EnhancedComponent extends Component<Props, State> {
+  class EnhancedComponent extends Component<Props, State> {
     constructor(props: Props) { super(props);
       this.state = { count: 0 };
     }
     
-		reset = (): void => this.setState({ count: 0 });
-		increment = (): void => this.setState((state) => ({ count: state.count + 1 }));
+    reset = (): void => this.setState({ count: 0 });
+    increment = (): void => this.setState((state) => ({ count: state.count + 1 }));
     componentDidUpdate = (): void => {
-    	if (this.state.count > this.props.max) this.reset();
+      if (this.state.count > this.props.max) this.reset();
     };
-		render = (): ReactElement => ( 
+
+    render = (): ReactElement => ( 
       // withCounterが引数として受け取ったコンポーネントに props としてそれらを渡してあげてる
       <WrappedComponent
         max={this.props.max} 
-				count={this.state.count}
+        count={this.state.count}
         reset={this.reset}
         increment={this.increment} 
-			/>
-     ); 
-	};
+      />
+    ); 
+  };
 
 
 // 状態やロジックを持たない 純粋な presentational component 
@@ -320,14 +319,14 @@ const withCounter = (WrappedComponent: FC<Props & Partial<InjectedProps>>) =>
 const CounterComponent: FC<Props & Partial<InjectedProps>> = ({ 
   max, 
   count = 0,
-	reset = () => undefined, 
+  reset = () => undefined, 
   increment = () => undefined,
-	})=>( 
+  })=>( 
     <div>
       <div> {count} / {max} </div>
       <button onClick={reset} type="button"> Reset </button>
       <button onClick={increment} type="button"> +1 </button>
-     </div> 
+    </div> 
 );
 
 // withCounterはHOCで、この中の count、reset、increment という 3 つの props に、
@@ -337,21 +336,20 @@ export default withCounter(CounterComponent);
 
 
 
-・CounterComponentの引数
-　・HOC 適用後の外側のコン ポーネントの props をうまく辻褄が合うように型合成してあげる必要がある
-　・内側のコンポーネントはそれ単体でも成立するよう、HOCで注入予定のpropsには
-　　デフォルト値を設定する必要がある。
+・CounterComponentの引数  
+  ・HOC 適用後の外側のコン ポーネントの props をうまく辻褄が合うように型合成してあげる必要がある  
+  ・内側のコンポーネントはそれ単体でも成立するよう、HOCで注入予定のpropsには  
+    デフォルト値を設定する必要がある。  
 
 
 
-・Render Props
-　React Elements を返す関数を props と して受け取ってそれを自身のレンダリングに利用するコンポーネント
+・Render Props  
+  React Elements を返す関数を props と して受け取ってそれを自身のレンダリングに利用するコンポーネント
 
 ```ts
 type Props = { target: string };
 // HelloComponent はコンポーネントだけど、React Elements を返す関数でもある
 const HelloComponent: FC<Props> = ({ target }) => <h1> Hello {target}!</h1>;
-
 
 const TargetProvider: FC<{ render: FC<Props> }> = ({ render }) => render({ target: 'Patty' });
 
@@ -366,13 +364,13 @@ import React, { Component, FC, ReactElement } from 'react';
 
 type ChildProps = { 
   count: number;
-	reset: () => void; 
+  reset: () => void; 
   increment: () => void;
 };
 
 type Props = {
-	max: number;
-	children: (props: ChildProps) => ReactElement;
+  max: number;
+  children: (props: ChildProps) => ReactElement;
 };
 
 type State = { count: number };
@@ -380,14 +378,14 @@ type State = { count: number };
 class CounterProvider extends Component<Props, State> { 
   constructor(props: Props) {
     super(props);
-		this.state = { count: 0 }; 
+    this.state = { count: 0 }; 
   }
   
-	reset = (): void => this.setState({ count: 0 });
-	increment = (): void => this.setState((state) => ({ count: state.count + 1 }));
-	componentDidUpdate = (): void => {
-		if (this.state.count > this.props.max) this.reset();
-	};
+  reset = (): void => this.setState({ count: 0 });
+  increment = (): void => this.setState((state) => ({ count: state.count + 1 }));
+  componentDidUpdate = (): void => {
+    if (this.state.count > this.props.max) this.reset();
+  };
   
   render = (): ReactElement => 
     this.props.children({
@@ -399,22 +397,18 @@ class CounterProvider extends Component<Props, State> {
 
 const Counter: FC<{ max: number }> = ({ max }) => ( 
   <CounterProvider max={max}>
-		{({ count, reset, increment }) => ( 
+    {({ count, reset, increment }) => ( 
       <div>
       	<div> {count} / {max} </div>
         <button onClick={reset} type="button">Reset</button>
         <button onClick={increment} type="button"> +1 </button>
        </div> 
-		)}
-	</CounterProvider> 
+    )}
+  </CounterProvider> 
 );
 
 export default Counter;
 ```
-
-
-
-
 
 ##### 9-2. Hooks で state を扱う
 
@@ -441,8 +435,8 @@ const plusThreeDirectly = () => [0, 1, 2].forEach((_) => setCount(count + 1));
 const plusThreeWithFunction = () => [0, 1, 2].forEach((_) => setCount((c) => c + 1));
 ```
 
-上記のコードの場合、<u>plusThreeDirectly</u>では、+1しかされない。
-　=> state 変数はそのコンポーネントのレンダリングごとで一定のため！
+上記のコードの場合、<u>plusThreeDirectly</u>では、+1しかされない。  
+=> state 変数はそのコンポーネントのレンダリングごとで一定のため！
 
 なので、state 変数を相対的に変更する処理を行うときは、前の値を直接参照・変更 するのは、
 避けて必ず *setCount((c) => c + 1)* のように関数で書くべき。
@@ -451,13 +445,13 @@ const plusThreeWithFunction = () => [0, 1, 2].forEach((_) => setCount((c) => c +
 
 ##### 9-3. Hooks で副作用を扱う
 
-コンポーネントの状態を変化させ、それ以降の出力を変えてしまう処理のこと。
+コンポーネントの状態を変化させ、それ以降の出力を変えてしまう処理のこと。  
 ネットワークを介したデータの取 得やそのリアクティブな購読、ログの記録、リアル DOM の手動での書き換えといったもの。
 
-React におけるコンポーネントとは、状態を持った関数のようなもので、
+React におけるコンポーネントとは、状態を持った関数のようなもので、  
 関数 y = f(x) は本来なら x が同じなら出力値 y も同じはずだけど、 状態を抱える関数であれば必ずしもそうとは限らない。
 
-Effect Hook とは、レンダリング のタイミングに同期させて実行するための Hooks API のこと。
+Effect Hook とは、レンダリング のタイミングに同期させて実行するための Hooks API のこと。  
 
 ```ts
 const SampleComponent: VFC = () => { 
@@ -473,56 +467,49 @@ const SampleComponent: VFC = () => {
 ```
 
 ① setTimeoutによるタイマー処理は、cleartimeoutして終了させないとエラーが出る。
-　 useEffect内で戻り値として任意の関数を返す様にしておくと、そのコンポーネントがアンマウントされるときにその戻り値の関数を実行してくれる。
-
-
+  useEffect内で戻り値として任意の関数を返す様にしておくと、そのコンポーネントがアンマウントされるときに  
+  その戻り値の関数を実行してくれる。  
 
 ###### Effect Hook とライフサイクルメソッドの相違点
 
 1. 実行されるタイミング
-   ```componentDidMount``` はその コンポーネントがマウントされてレンダリング内容が仮想 DOM からリアル DOM へ反映される前 に、ブラウザへの表示をブロックして実行される。
+   ```componentDidMount``` はその コンポーネントがマウントされてレンダリング内容が仮想 DOM からリアル DOM へ反映される前 に、ブラウザへの表示をブロックして実行される。  
+   いっぽう ```useEffect``` が初回実行されるのは、最初のレンダリングが行われてその内容がブラウザに反映された直後。  
+   → useEffectではレスポンス性を高めるために、とりあえず、初期値を設定する様にしている。  
 
-   いっぽう ```useEffect``` が初回実行されるのは、最初のレンダリングが行われてその内容がブラウザ に反映された直後。
+   ※ ただ、```useLayoutEffect ```は、```componentDidMountやcomponentDidUpdate```と同じタイミングで実行される。ユースケースとしては、た とえば特定の DOM 要素の位置やブラウザの幅とかを取得してレンダリングに利用するなど。  
+   だから使っていいのは副作用処理にかかる時間のほうが、React が仮想 DOM の 差分を検知して再描画する時間よりも明らかに短くなるようなレアな場合に限定される。  
 
-   → useEffectではレスポンス性を高めるために、とりあえず、初期値を設定する様にしている。
+2. props と state の値の即時性  
+   マウントによってインスタンスが生成されてアンマウントまでそれが生き続けるクラスコンポーネント。  
+   レンダリングのたびに実行されては破棄される関数コンポー ネントが根本的に異なる。  
+   → 関数コンポーネントはレンダリングの度に破棄されるので、クラスコンポーネントと違い、インスタンス変数の保持ができないが、Hooksによってコンポーネント外部で保存されて、次回のレンダリングで改めて渡される。  
+   ・クラスCは、レンダリングと関係なく変数を内部のミュータブルな値として保持している。  
+   ・関数C　は、レンダリングの度に、外からイミュータブルな値として与えられる。  
 
-   ※ ただ、```useLayoutEffect ```は、```componentDidMountやcomponentDidUpdate```と同じタイミングで実行される。ユースケースとしては、た とえば特定の DOM 要素の位置やブラウザの幅とかを取得してレンダリングに利用するなど。
-   だから使っていいのは副作用処理にかかる時間のほうが、React が仮想 DOM の 差分を検知して再描画する時間よりも明らかに短くなるようなレアな場合に限定される。　
+    cf.「関数コンポーネントはクラスとどう違うのか? —Overreacted」
+    https://overreacted.io/ja/how-are-function-components-different-from-classes/
 
-   
+3. 凝集の単位  
+   ・クラスコンポーネントは、  
+   ```componentDidMount```・```componentDidUpdate```・```componentWillUnmount```と、  
+   3つのライフサイクルメソッドに分散されてしまう。これが、機能的凝集度が低い。  
+   ・関数コンポーネントは、  
+   一つの```useEffect```内に、上記の全ての処理を纏めて描くことができる。  
 
-2. props と state の値の即時性
-   マウントによってインスタンスが生成されてアンマウントまでそれが生き続けるクラスコンポーネント。
-   レンダリングのたびに実行されては破棄される関数コンポー ネントが根本的に異なる。
-   → 関数コンポーネントはレンダリングの度に破棄されるので、クラスコンポーネントと違い、インスタンス変数の保持ができないが、Hooksによってコンポーネント外部で保存されて、次回のレンダリングで改めて渡される。
-   ・クラスCは、レンダリングと関係なく変数を内部のミュータブルな値として保持している。
-   ・関数C　は、レンダリングの度に、外からイミュータブルな値として与えられる。
+   機能的凝集度が高いということは、  
+   同じ機能が分散して記述されないためコードの可読性が高いのはもちろん、  
+   機能によってまとまったロジックをコンポーネントから切り離して再利用しやすい。  
 
-　　cf.「関数コンポーネントはクラスとどう違うのか? —Overreacted」
-　　https://overreacted.io/ja/how-are-function-components-different-from-classes/
-
-3. 凝集の単位
-   ・クラスコンポーネントは、
-   ```componentDidMount```・```componentDidUpdate```・```componentWillUnmount```と、
-   3つのライフサイクルメソッドに分散されてしまう。これが、機能的凝集度が低い。
-   ・関数コンポーネントは、
-   一つの```useEffect```内に、上記の全ての処理を纏めて描くことができる。
-
-   機能的凝集度が高いということは、
-   同じ機能が分散して記述されないためコードの可読性が高いのはもちろん、
-   機能によってまとまったロジックをコンポーネントから切り離して再利用しやすい。
-
-cf. 「useEffect 完全ガイド —Overreacted」https://overreacted.io/ja/a-complete-guide-to-useeffect/
-
-
+cf. 「useEffect 完全ガイド —Overreacted」https://overreacted.io/ja/a-complete-guide-to-useeffect/  
 
 ##### 9-4. Hooks におけるメモ化を理解する
 
-・useMemo
+・useMemo  
 
-関数の実行結果をメモ化するHooks API。
-レンダリングの度に、関数を実行しても戻り値が変わらない場合に再実行を抑える。
-useMemo の第二引数の値が変化した場合のみ、第一引数の関数を実行する。
+関数の実行結果をメモ化するHooks API。  
+レンダリングの度に、関数を実行しても戻り値が変わらない場合に再実行を抑える。  
+useMemo の第二引数の値が変化した場合のみ、第一引数の関数を実行する。  
 
 ```ts
 ・引数の数字の中で、素数を含む配列を生成する関数。
@@ -533,24 +520,21 @@ export const getPrimes = (maxRange: number): number[] =>
       if (n % i === 0) return false;
     }
    return true;
-	});
+  });
 
 // limitが変更があった時のみ、getPrimes(limit)を計算し、primesに値を代入する。
 const primes = useMemo(() => getPrimes(limit), [limit]);
 
 <Statistic.Value
-　className={primes.includes(timeLeft) ? 'prime-number' : undefined} 
+  className={primes.includes(timeLeft) ? 'prime-number' : undefined} 
 >
   {timeLeft} 
 </Statistic.Value>
 ```
 
-
-
-・useCallback
-
-関数定義そ のものをメモ化するためのもの。
-関数はレンダリングの度に異なるPCメモリの箇所に定義されるので、useEffectの第二引数に渡す場合など、Memo化していないと、毎回変更検知されてしまう。
+・useCallback  
+関数定義そ のものをメモ化するためのもの。  
+関数はレンダリングの度に異なるPCメモリの箇所に定義されるので、useEffectの第二引数に渡す場合など、Memo化していないと、毎回変更検知されてしまう。  
 
 ```ts
  - const reset = (): void => setTimeLeft(limit);
@@ -583,18 +567,18 @@ const TextInput: VFC = () => {
     <>
       <input ref={inputRef} type="text" />  // ② ref 属性に代入
       <button onClick={handleClick} type="button">Click</button>
-		</> 
-	);
+    </> 
+  );
 };
 
 export default TextInput;
 ```
 
-useRefには上記のような「リアルDOMを参照する」以外に、「あらゆる書き換え可能な値を保持しておく」ことができる。
+useRefには上記のような「リアルDOMを参照する」以外に、「あらゆる書き換え可能な値を保持しておく」ことができる。  
 
-以下の例では、カウントダウンアプリのtimerIDを保持している。
-useStateではなく**useRefで値を保持している理由**としては、**値が変更しても再レンダリングが走らない。**
-ため、リソースを削減出来る。
+以下の例では、カウントダウンアプリのtimerIDを保持している。  
+useStateではなく**useRefで値を保持している理由**としては、**値が変更しても再レンダリングが走らない。**  
+ため、リソースを削減出来る。  
 
 ```ts
 const timerId = useRef<NodeJS.Timeout>(); // この型は、setIntervalの戻り値。
@@ -615,8 +599,6 @@ useEffect(() => {
   return clearTimer;  // timerIDを初期化
 }, [reset]);
 ```
-
-
 
 ##### 9-5. Custom Hook でロジックを分離・再利用する
 
@@ -736,8 +718,8 @@ export default Timer;
 
 ・src/containers/Timer.tsx ( container component )
 
-　変数の取得し描画については子コンポーネントに委ねている。
-　今後も、表示内容が増えればここで定義して、値は子コンポーネントに渡すだけ。
+  変数の取得し描画については子コンポーネントに委ねている。  
+  今後も、表示内容が増えればここで定義して、値は子コンポーネントに渡すだけ。  
 
 ```ts
 import { VFC } from 'react';
